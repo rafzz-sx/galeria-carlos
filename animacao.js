@@ -29,7 +29,10 @@ btnGaleria.addEventListener("click", () => {
         instrucoes.remove();
     }, 600);
 });
-let audioAtual = null;
+let audioAtual = new Audio(); // CRIADO FORA DO CLIQUE
+audioAtual.preload = "auto";
+audioAtual.volume = 1;
+
 let elementoAtivo = null;
 
 const elementosComAudio = document.querySelectorAll('[data-audio]');
@@ -50,8 +53,13 @@ elementosComAudio.forEach(el => {
         el.classList.add("ativo");
         elementoAtivo = el;
 
-        audioAtual = new Audio(audioSrc);
-        audioAtual.play();
+        // APENAS TROCA O SRC E DÁ PLAY
+        audioAtual.src = audioSrc;
+        audioAtual.currentTime = 0;
+
+        audioAtual.play().catch(() => {
+            console.log("Áudio bloqueado pelo navegador mobile");
+        });
     });
 });
 
@@ -59,7 +67,6 @@ function pararTudo() {
     if (audioAtual) {
         audioAtual.pause();
         audioAtual.currentTime = 0;
-        audioAtual = null;
     }
 
     if (elementoAtivo) {
