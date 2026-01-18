@@ -75,7 +75,7 @@
     gap: 60px;
     width: max-content;
     opacity: 0.9;
-    animation: esteira 40s linear infinite;
+    animation: esteira 60s linear infinite;
 }
 
 .faixa img {
@@ -263,4 +263,5 @@
 body {
      background-color: #222; /* fundo escuro */ 
 }
+
 
