@@ -52,3 +52,214 @@
         flex: 1 1 100%;
     }
 }
+.intro {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    overflow: hidden;
+    background: #0a0a0f;
+}
+
+/* ESTEIRA DE FUNDO */
+.bg-esteira {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding-top: 10px; /* DESCE A ESTEIRA */
+}
+
+.faixa {
+    display: flex;
+    gap: 60px;
+    width: max-content;
+    opacity: 0.9;
+    animation: esteira 15s linear infinite;
+}
+
+.faixa img {
+    width: 260px;
+    filter: blur(1px) brightness(0.95);
+}
+
+@keyframes esteira {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-40%); }
+}
+
+/* OVERLAY DE COR (REFINO) */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        rgba(90, 50, 255, 0.6),
+        rgba(0, 200, 255, 0.6)
+    );
+    backdrop-filter: blur(6px);
+}
+
+/* CONTEÚDO CENTRAL */
+.conteudo-intro {
+    position: relative;
+    z-index: 10;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    color: white;
+    text-align: center;
+}
+
+/* LINHA NEON */
+.linha-neon {
+    width: 250px;
+    height: 4px;
+    background: #00f0ff;
+    box-shadow: 0 0 20px #00f0ff;
+}
+
+/* TÍTULO */
+.conteudo-intro h1 {
+    font-size: 42px;
+    font-weight: 300;
+    letter-spacing: 4px;
+}
+
+/* BOTÃO */
+.entrar {
+    margin-top: 10px;
+    padding: 14px 42px;
+    font-size: 15px;
+    letter-spacing: 3px;
+    background: transparent;
+    color: white;
+    border: 1px solid rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.entrar:hover {
+    background: rgb(140, 169, 250);
+    color: black;
+}
+
+/* =========================
+   SAÍDA DA INTRO
+   ========================= */
+
+.intro.sair {
+    animation: sair 2s ease forwards;
+}
+
+@keyframes sair {
+    to {
+        opacity: 0;
+        transform: scale(1.05);
+        filter: blur(10px);
+    }
+}
+/* =========================
+   CAMADA DE INSTRUÇÕES
+   ========================= */
+
+   .instrucoes {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9000;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s ease;
+}
+
+/* ATIVA */
+.instrucoes.ativa {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* CONTEÚDO */
+.conteudo-instrucoes {
+    max-width: 600px;
+    text-align: center;
+    padding: 20px;
+}
+
+.conteudo-instrucoes h2 {
+    font-size: 32px;
+    font-weight: 300;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.conteudo-instrucoes p {
+    font-size: 16px;
+    line-height: 1.7;
+    opacity: 0.85;
+}
+
+/* BOTÃO */
+.btn-galeria {
+    margin-top: 30px;
+    padding: 14px 40px;
+    font-size: 14px;
+    letter-spacing: 3px;
+
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-galeria:hover {
+    background: white;
+    color: black;
+}
+.card {
+    position: relative;
+    cursor: pointer;
+}
+
+.card .texto {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+/* ATIVO */
+.card.ativo .texto {
+    opacity: 1;
+}
+.conteudo-instrucoes h2 {
+     font-size: 36px; /* antes: 32px */ 
+}
+.conteudo-instrucoes p {
+     font-size: 22px; /* antes: 16px */ 
+     line-height: 1.8; /* melhora a leitura */ 
+}
+.conteudo-intro h1 { 
+    font-size: 52px; /* antes: 42px */
+     letter-spacing: 3px; /* opcional: reduzir um pouco o espaçamento */
+}
+body {
+     background-color: #222; /* fundo escuro */ 
+}
