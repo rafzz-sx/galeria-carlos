@@ -54,8 +54,7 @@
     </section>   
 
     <section class="galeria">
-        <!-- Foto 1 -->
-        <article data-audio="audio/meu-ebano.mp3">
+        <article data-audio="audio/meu-ebano.mp3" data-id="foto1">
             <img src="https://files.catbox.moe/r6psr8.png" alt="F O M E (de macho)" class="foto">
             <div class="info">
                 <h2>Carlos degustando o lanche enquanto olha a sobremesa...</h2>
@@ -63,8 +62,7 @@
             </div>
         </article>
 
-        <!-- Foto 2 -->
-        <article data-audio="audio/sedutor.mp3">
+        <article data-audio="audio/sedutor.mp3" data-id="foto2">
             <img src="https://files.catbox.moe/tsrfpl.png" alt="Sedutor" class="foto">
             <div class="info">
                 <h2>Carlos é flagrado tentando seduzir o autor da foto!</h2>
@@ -72,8 +70,7 @@
             </div>    
         </article>
 
-        <!-- Foto 3 -->
-        <article data-audio="audio/mais-forte.mp3">
+        <article data-audio="audio/mais-forte.mp3" data-id="foto3">
             <img src="https://files.catbox.moe/y2gn94.png" alt="PENSADOR" class="foto">
             <div class="info">
                 <h2>Carlos FARMANDO ! AURA !</h2>
@@ -81,8 +78,7 @@
             </div>
         </article>
 
-        <!-- Foto 4 -->
-        <article data-audio="audio/monobola.mp3">
+        <article data-audio="audio/monobola.mp3" data-id="foto4">
             <img src="https://files.catbox.moe/9y7nuz.png" alt="sorridente" class="foto">
             <div class="info">
                 <h2>NADA tira o sorriso desse menino</h2>
@@ -90,16 +86,14 @@
             </div>
         </article>
 
-        <!-- Foto 5 -->
-        <article data-audio="audio/nao-temos-medo.mp3">
+        <article data-audio="audio/nao-temos-medo.mp3" data-id="foto5">
             <img src="https://files.catbox.moe/r8g6b2.png" alt="trem sem freio" class="foto">
             <div class="info">
                 <h2>Carlos descansando em seu castelo</h2>
             </div> 
         </article>
 
-        <!-- Foto 6 -->
-        <article data-audio="audio/papo.mp3">
+        <article data-audio="audio/papo.mp3" data-id="foto6">
             <img src="https://files.catbox.moe/9y6vga.png" alt="paocomovo" class="foto">
             <div class="info">
                 <h2>Sua primeira e ultima refeiçao do dia é Pao com Ovo</h2>
@@ -107,28 +101,50 @@
         </article>
     </section>
 
-    <!-- ÁREA ADMIN -->
+    <!-- PAINEL ADMIN MELHORADO -->
     <div id="adminPanel">
         <h2>📊 PAINEL DO CARLOS</h2>
         <button class="btn-fechar" onclick="fecharAdmin()">FECHAR X</button>
         
-        <div class="admin-section">
-            <h3>🕐 Acesso Atual:</h3>
-            <p id="acessoAtual"></p>
+        <!-- SESSÃO ATUAL -->
+        <div class="admin-section destaque">
+            <h3>🖥️ SESSÃO ATUAL</h3>
+            <div id="sessaoAtual"></div>
         </div>
-        
+
+        <!-- ESTATÍSTICAS GERAIS -->
         <div class="admin-section">
-            <h3>📱 Histórico de Visitas (<span id="totalVisitas">0</span> total):</h3>
-            <div id="historicoVisitas"></div>
+            <h3>📈 Estatísticas Gerais</h3>
+            <div class="stats-grid" id="statsGerais"></div>
         </div>
-        
+
+        <!-- DISPOSITIVOS -->
         <div class="admin-section">
-            <h3>🖼️ Cliques nas Fotos:</h3>
-            <div id="statsFotos"></div>
+            <h3>📱 Dispositivos que Acessaram (<span id="totalDispositivos">0</span>)</h3>
+            <div id="listaDispositivos"></div>
         </div>
-        
-        <button class="btn-exportar" onclick="exportarDados()">💾 Exportar Dados</button>
-        <button class="btn-limpar" onclick="limparDados()">🗑️ Limpar Dados</button>
+
+        <!-- HISTÓRICO DETALHADO POR SESSÃO -->
+        <div class="admin-section">
+            <h3>📜 Histórico por Sessão (últimas 20)</h3>
+            <div id="historicoSessoes"></div>
+        </div>
+
+        <!-- FOTOS MAIS CLICADAS POR DISPOSITIVO -->
+        <div class="admin-section">
+            <h3>🖼️ Preferências por Dispositivo</h3>
+            <div id="preferenciasDispositivo"></div>
+        </div>
+
+        <!-- LOG EM TEMPO REAL -->
+        <div class="admin-section">
+            <h3>⚡ Atividade em Tempo Real</h3>
+            <div id="logAtividade" style="max-height: 200px; overflow-y: auto; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 5px; font-size: 12px;"></div>
+        </div>
+
+        <button class="btn-exportar" onclick="exportarDados()">💾 Exportar JSON</button>
+        <button class="btn-exportar" onclick="exportarCSV()" style="background: #00ff88;">📊 Exportar CSV</button>
+        <button class="btn-limpar" onclick="limparDados()">🗑️ Limpar Tudo</button>
     </div>
 
     <!-- Botão secreto mobile -->
