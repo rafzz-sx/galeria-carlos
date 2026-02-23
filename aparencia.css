@@ -1,3 +1,7 @@
+/* ==========================================
+   GALERIA DO CARLOS - CSS ATUALIZADO
+   ========================================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -225,7 +229,7 @@ body {
 }
 
 /* ==========================================
-   PAINEL ADMIN - ESTILOS COMPLETOS
+   PAINEL ADMIN MELHORADO
    ========================================== */
 #adminPanel {
     display: none;
@@ -248,6 +252,7 @@ body {
     padding-bottom: 10px;
     margin-bottom: 20px;
     font-size: 28px;
+    text-shadow: 0 0 10px #00f0ff;
 }
 
 .btn-fechar {
@@ -262,82 +267,253 @@ body {
     font-size: 16px;
     font-weight: bold;
     border-radius: 5px;
+    transition: 0.3s;
 }
 
 .btn-fechar:hover {
     background: #ff3377;
+    transform: scale(1.05);
 }
 
 .admin-section {
     margin: 20px 0;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 15px;
-    border-radius: 8px;
-    border-left: 3px solid #00f0ff;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    border-left: 4px solid #00f0ff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.admin-section.destaque {
+    border-left-color: #ff0055;
+    background: rgba(255, 0, 85, 0.1);
 }
 
 .admin-section h3 {
     color: #fff;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-#acessoAtual {
-    font-size: 16px;
-    color: #fff;
-    line-height: 1.6;
+/* Grid de estatísticas */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
 }
 
-#historicoVisitas {
-    max-height: 300px;
-    overflow-y: auto;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.visita-item {
-    border-bottom: 1px solid #333;
-    padding: 8px 0;
-    color: #fff;
-}
-
-.visita-item.recente {
+.stat-card {
     background: rgba(0, 240, 255, 0.1);
-    border-left: 3px solid #00f0ff;
-    padding-left: 10px;
+    border: 1px solid #00f0ff;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
 }
 
-.visita-data {
-    color: #00f0ff;
+.stat-number {
+    font-size: 32px;
     font-weight: bold;
+    color: #00f0ff;
+    display: block;
 }
 
-.visita-info {
-    color: #888;
+.stat-label {
     font-size: 12px;
+    color: #888;
+    text-transform: uppercase;
+    margin-top: 5px;
 }
 
-#statsFotos {
-    background: rgba(0, 0, 0, 0.3);
-    padding: 10px;
-    border-radius: 5px;
+/* Cards de dispositivo */
+.device-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    transition: 0.3s;
 }
 
-.foto-stat {
+.device-card:hover {
+    background: rgba(0, 240, 255, 0.1);
+    border-color: #00f0ff;
+}
+
+.device-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #333;
-    color: #fff;
+    margin-bottom: 10px;
 }
 
-.foto-stat-count {
+.device-icon {
+    font-size: 24px;
+}
+
+.device-name {
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+}
+
+.device-info {
+    font-size: 12px;
+    color: #888;
+    margin-top: 5px;
+}
+
+.device-stats {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+    font-size: 13px;
+}
+
+.device-stat {
+    background: rgba(0,0,0,0.3);
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.device-stat-value {
     color: #00f0ff;
     font-weight: bold;
 }
 
+/* Sessões */
+.sessao-item {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-left: 3px solid #00f0ff;
+}
+
+.sessao-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.sessao-device {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.sessao-time {
+    color: #00f0ff;
+    font-size: 14px;
+}
+
+.sessao-fotos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.foto-tag {
+    background: rgba(0, 240, 255, 0.2);
+    color: #00f0ff;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    border: 1px solid #00f0ff;
+}
+
+.foto-tag:hover {
+    background: rgba(0, 240, 255, 0.4);
+}
+
+/* Preferências por dispositivo */
+.pref-item {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.pref-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.pref-device {
+    font-weight: bold;
+    color: #fff;
+    font-size: 16px;
+}
+
+.pref-fotos {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pref-foto-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 5px;
+}
+
+.pref-foto-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 3px;
+    margin: 0 10px;
+    overflow: hidden;
+}
+
+.pref-foto-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00f0ff, #ff0055);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+.pref-foto-count {
+    color: #00f0ff;
+    font-weight: bold;
+    min-width: 30px;
+    text-align: right;
+}
+
+/* Log de atividade */
+.log-entry {
+    padding: 5px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 11px;
+    color: #aaa;
+}
+
+.log-entry.new {
+    color: #00f0ff;
+    animation: pulse 2s;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Botões */
 .btn-exportar, .btn-limpar {
     margin-top: 20px;
     margin-right: 10px;
@@ -357,6 +533,8 @@ body {
 
 .btn-exportar:hover {
     background: #33f3ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 240, 255, 0.4);
 }
 
 .btn-limpar {
@@ -366,9 +544,10 @@ body {
 
 .btn-limpar:hover {
     background: #ff3377;
+    transform: translateY(-2px);
 }
 
-/* Scrollbar do painel */
+/* Scrollbar */
 #adminPanel::-webkit-scrollbar {
     width: 10px;
 }
@@ -431,15 +610,24 @@ body {
     
     #adminPanel {
         padding: 15px;
-        font-size: 14px;
+        font-size: 13px;
     }
     
     #adminPanel h2 {
-        font-size: 22px;
+        font-size: 20px;
     }
     
     .btn-fechar {
         padding: 8px 16px;
         font-size: 14px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .device-header, .sessao-header {
+        flex-direction: column;
+        align-items: flex-start;
     }
 }
