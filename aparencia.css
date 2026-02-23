@@ -1,20 +1,3 @@
-/* ==========================================
-   GALERIA DO CARLOS - CSS COMPLETO
-   ========================================== */
-
-/* === VARIÁVEIS === */
-:root {
-    --neon-color: #00f0ff;
-    --neon-glow: 0 0 20px #00f0ff;
-    --bg-dark: #0a0a0f;
-    --overlay-gradient: linear-gradient(
-        120deg,
-        rgba(90, 50, 255, 0.6),
-        rgba(0, 200, 255, 0.6)
-    );
-}
-
-/* === RESET BÁSICO === */
 * {
     margin: 0;
     padding: 0;
@@ -37,7 +20,6 @@ body {
     padding: 40px;
 }
 
-/* CARD */
 .galeria article {
     flex: 1 1 calc(50% - 40px);
     position: relative;
@@ -45,19 +27,17 @@ body {
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .galeria article:hover {
     transform: scale(1.02);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
 }
 
 .galeria article.ativo {
-    box-shadow: 0 0 30px var(--neon-color);
+    box-shadow: 0 0 30px #00f0ff;
 }
 
-/* IMAGEM */
 .galeria img {
     width: 100%;
     height: 800px;
@@ -65,7 +45,6 @@ body {
     object-fit: cover;
 }
 
-/* TEXTO (FORA DO FLUXO) */
 .galeria .info {
     position: absolute;
     bottom: 0;
@@ -80,7 +59,6 @@ body {
     pointer-events: none;
 }
 
-/* TEXTO ATIVO */
 .galeria .info.ativo {
     opacity: 1;
     transform: translateY(0);
@@ -98,7 +76,6 @@ body {
     background: #0a0a0f;
 }
 
-/* ESTEIRA DE FUNDO */
 .bg-esteira {
     position: absolute;
     inset: 0;
@@ -126,15 +103,13 @@ body {
     to   { transform: translateX(-40%); }
 }
 
-/* OVERLAY DE COR */
 .overlay {
     position: absolute;
     inset: 0;
-    background: var(--overlay-gradient);
+    background: linear-gradient(120deg, rgba(90, 50, 255, 0.6), rgba(0, 200, 255, 0.6));
     backdrop-filter: blur(6px);
 }
 
-/* CONTEÚDO CENTRAL */
 .conteudo-intro {
     position: relative;
     z-index: 10;
@@ -148,22 +123,19 @@ body {
     text-align: center;
 }
 
-/* LINHA NEON */
 .linha-neon {
     width: 250px;
     height: 4px;
-    background: var(--neon-color);
-    box-shadow: var(--neon-glow);
+    background: #00f0ff;
+    box-shadow: 0 0 20px #00f0ff;
 }
 
-/* TÍTULO */
 .conteudo-intro h1 {
     font-size: 52px;
     font-weight: 300;
     letter-spacing: 3px;
 }
 
-/* BOTÃO */
 .entrar {
     margin-top: 10px;
     padding: 14px 42px;
@@ -181,7 +153,6 @@ body {
     color: black;
 }
 
-/* SAÍDA DA INTRO */
 .intro.sair {
     animation: sair 2s ease forwards;
 }
@@ -211,13 +182,11 @@ body {
     transition: opacity 0.6s ease;
 }
 
-/* ATIVA */
 .instrucoes.ativa {
     opacity: 1;
     pointer-events: auto;
 }
 
-/* CONTEÚDO */
 .conteudo-instrucoes {
     max-width: 600px;
     text-align: center;
@@ -238,7 +207,6 @@ body {
     margin-bottom: 15px;
 }
 
-/* BOTÃO */
 .btn-galeria {
     margin-top: 30px;
     padding: 14px 40px;
@@ -257,12 +225,150 @@ body {
 }
 
 /* ==========================================
-   PAINEL ADMIN
+   PAINEL ADMIN - ESTILOS COMPLETOS
    ========================================== */
 #adminPanel {
-    backdrop-filter: blur(10px);
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 10, 15, 0.98);
+    z-index: 99999;
+    color: #00f0ff;
+    padding: 20px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
 }
 
+#adminPanel h2 {
+    color: #00f0ff;
+    border-bottom: 2px solid #00f0ff;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    font-size: 28px;
+}
+
+.btn-fechar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: #ff0055;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.btn-fechar:hover {
+    background: #ff3377;
+}
+
+.admin-section {
+    margin: 20px 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #00f0ff;
+}
+
+.admin-section h3 {
+    color: #fff;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+#acessoAtual {
+    font-size: 16px;
+    color: #fff;
+    line-height: 1.6;
+}
+
+#historicoVisitas {
+    max-height: 300px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.visita-item {
+    border-bottom: 1px solid #333;
+    padding: 8px 0;
+    color: #fff;
+}
+
+.visita-item.recente {
+    background: rgba(0, 240, 255, 0.1);
+    border-left: 3px solid #00f0ff;
+    padding-left: 10px;
+}
+
+.visita-data {
+    color: #00f0ff;
+    font-weight: bold;
+}
+
+.visita-info {
+    color: #888;
+    font-size: 12px;
+}
+
+#statsFotos {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.foto-stat {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #333;
+    color: #fff;
+}
+
+.foto-stat-count {
+    color: #00f0ff;
+    font-weight: bold;
+}
+
+.btn-exportar, .btn-limpar {
+    margin-top: 20px;
+    margin-right: 10px;
+    padding: 12px 24px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-exportar {
+    background: #00f0ff;
+    color: #000;
+}
+
+.btn-exportar:hover {
+    background: #33f3ff;
+}
+
+.btn-limpar {
+    background: #ff0055;
+    color: white;
+}
+
+.btn-limpar:hover {
+    background: #ff3377;
+}
+
+/* Scrollbar do painel */
 #adminPanel::-webkit-scrollbar {
     width: 10px;
 }
@@ -272,16 +378,22 @@ body {
 }
 
 #adminPanel::-webkit-scrollbar-thumb {
-    background: var(--neon-color);
+    background: #00f0ff;
     border-radius: 5px;
 }
 
-#adminPanel h3 {
-    color: #fff;
-    margin-top: 20px;
-    font-size: 20px;
-    border-left: 3px solid var(--neon-color);
-    padding-left: 10px;
+/* ==========================================
+   BOTÃO SECRETO MOBILE
+   ========================================== */
+#mobileSecret {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    z-index: 9998;
+    opacity: 0;
+    background: transparent;
 }
 
 /* ==========================================
@@ -303,7 +415,6 @@ body {
     
     .conteudo-intro h1 {
         font-size: 32px;
-        letter-spacing: 2px;
     }
     
     .faixa img {
@@ -324,6 +435,11 @@ body {
     }
     
     #adminPanel h2 {
-        font-size: 24px;
+        font-size: 22px;
+    }
+    
+    .btn-fechar {
+        padding: 8px 16px;
+        font-size: 14px;
     }
 }
