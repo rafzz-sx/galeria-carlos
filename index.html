@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>G A L E R I A do Carlos</title>
     <link rel="stylesheet" href="aparencia.css">
-    <!-- Preload das imagens principais -->
     <link rel="preload" href="https://files.catbox.moe/r6psr8.png" as="image">
     <link rel="preload" href="https://files.catbox.moe/tsrfpl.png" as="image">
 </head>
 <body>
     <section class="intro" id="intro">
-
         <div class="bg-esteira">
             <div class="faixa">
                 <img src="https://files.catbox.moe/r6psr8.png">
@@ -30,107 +28,111 @@
                 <img src="https://files.catbox.moe/tsrfpl.png">
                 <img src="https://files.catbox.moe/y2gn94.png">
                 <img src="https://files.catbox.moe/9y7nuz.png">
-                
             </div>
         </div>
         <div class="overlay"></div>
 
-    <div class="conteudo-intro">
-        <span class="linha-neon"></span>
-        <h1>Galeria do Carlos</h1>
-        <button class="entrar" id="entrar">Acessar</button>
-    </div>
-
-</section>
-<section class="instrucoes" id="instrucoes">
-
-    <div class="conteudo-instrucoes">
-        <h2>Antes de entrar</h2>
-
-        <p>
-            Nesta galeria, para melhor experiência, aperte apenas 1 vez na foto para
-            seu texto e sua musica dedicada apareçam. Para o texto e musica sairem, aperte novamente na foto,
-            pois se clicar em varias fotos ao mesmo tempo a musica poderá se desincronizar com o texto.
-            Obrigado!
-        </p>
-        <p>ass: O mais gostoso</p>
-
-        <button class="btn-galeria" id="btnGaleria">
-            Acessar Galeria
-        </button>
-    </div>
-
-</section>   
-
-    <section class="galeria">
-    <article data-audio="meu-ebano.mp3">
-        <img src="https://files.catbox.moe/r6psr8.png" alt="F O M E (de macho)" class="foto">
-        <div class="info">
-         <h2> Carlos degustando o lanche enquanto olha a sobremesa...</h2>
-         <p>Diz o mestre Carlos que o sonho dele é o Olavo</p>
+        <div class="conteudo-intro">
+            <span class="linha-neon"></span>
+            <h1>Galeria do Carlos</h1>
+            <button class="entrar" id="entrar">Acessar</button>
         </div>
-    </article>
-    <article data-audio="sedutor.mp3">
-        <img src="https://files.catbox.moe/tsrfpl.png" alt="Sedutor" class="foto">
-        <div class="info">
-         <h2>Carlos é flagrado tentando seduzir o autor da foto!</h2>
-         <p> Desde 2008 seduzindo Homens</p>
-        </div>    
-        </article>
-    <article data-audio="mais-forte.mp3">
-        <img src="https://files.catbox.moe/y2gn94.png" alt="PENSADOR" class="foto">
-        <div class="info">
-         <h2>Carlos FARMANDO ! AURA !</h2>
-         <p>tentando Moggar o camera man </p>
-        </div>
-    </article>
-    <article data-audio="audio/monobola.mp3">
-        <img src="https://files.catbox.moe/9y7nuz.png" alt="sorridente" class="foto">
-        <div class= "info">
-         <h2> NADA tira o sorriso desse menino</h2>
-         <p>o bullying nao conseguiu, o abuso de crianças sobre ele nao conseguiu, Carlos é realmente ESPECIAL</p>
-        </div>
-    </article>
-    <article data-audio="audio/nao-temos-medo.mp3">
-        <img src="https://files.catbox.moe/r8g6b2.png" alt="trem sem freio" class="foto">
-        <div class="info">
-            <h2> Carlos descansando em seu castelo</h2>
-        </div> 
-    </article>
-    <article data-audio="audio/papo.mp3">
-        <img src="https://files.catbox.moe/9y6vga.png" alt="paocomovo" class="foto">
-        <div class="info">
-            <h2> Sua primeira e ultima refeiçao do dia é Pao com Ovo</h2>
-        </div>
-    </article>
     </section>
 
-    <!-- ÁREA ADMIN SECRETA - aperte a tecla 'C' 3 vezes rapidamente para abrir -->
-    <div id="adminPanel" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95); z-index:99999; color:#00f0ff; padding:20px; overflow-y:auto; font-family:monospace;">
-        <h2 style="color:#00f0ff; border-bottom:2px solid #00f0ff; padding-bottom:10px;">📊 PAINEL DO CARLOS</h2>
-        <button onclick="fecharAdmin()" style="position:absolute; top:20px; right:20px; background:#ff0055; color:white; border:none; padding:10px 20px; cursor:pointer; font-size:16px;">FECHAR X</button>
+    <section class="instrucoes" id="instrucoes">
+        <div class="conteudo-instrucoes">
+            <h2>Antes de entrar</h2>
+            <p>
+                Nesta galeria, para melhor experiência, aperte apenas 1 vez na foto para
+                seu texto e sua musica dedicada apareçam. Para o texto e musica sairem, aperte novamente na foto,
+                pois se clicar em varias fotos ao mesmo tempo a musica poderá se desincronizar com o texto.
+                Obrigado!
+            </p>
+            <p>ass: O mais gostoso</p>
+            <button class="btn-galeria" id="btnGaleria">Acessar Galeria</button>
+        </div>
+    </section>   
+
+    <section class="galeria">
+        <!-- Foto 1 -->
+        <article data-audio="audio/meu-ebano.mp3">
+            <img src="https://files.catbox.moe/r6psr8.png" alt="F O M E (de macho)" class="foto">
+            <div class="info">
+                <h2>Carlos degustando o lanche enquanto olha a sobremesa...</h2>
+                <p>Diz o mestre Carlos que o sonho dele é o Olavo</p>
+            </div>
+        </article>
+
+        <!-- Foto 2 -->
+        <article data-audio="audio/sedutor.mp3">
+            <img src="https://files.catbox.moe/tsrfpl.png" alt="Sedutor" class="foto">
+            <div class="info">
+                <h2>Carlos é flagrado tentando seduzir o autor da foto!</h2>
+                <p>Desde 2008 seduzindo Homens</p>
+            </div>    
+        </article>
+
+        <!-- Foto 3 -->
+        <article data-audio="audio/mais-forte.mp3">
+            <img src="https://files.catbox.moe/y2gn94.png" alt="PENSADOR" class="foto">
+            <div class="info">
+                <h2>Carlos FARMANDO ! AURA !</h2>
+                <p>tentando Moggar o camera man</p>
+            </div>
+        </article>
+
+        <!-- Foto 4 -->
+        <article data-audio="audio/monobola.mp3">
+            <img src="https://files.catbox.moe/9y7nuz.png" alt="sorridente" class="foto">
+            <div class="info">
+                <h2>NADA tira o sorriso desse menino</h2>
+                <p>o bullying nao conseguiu, o abuso de crianças sobre ele nao conseguiu, Carlos é realmente ESPECIAL</p>
+            </div>
+        </article>
+
+        <!-- Foto 5 -->
+        <article data-audio="audio/nao-temos-medo.mp3">
+            <img src="https://files.catbox.moe/r8g6b2.png" alt="trem sem freio" class="foto">
+            <div class="info">
+                <h2>Carlos descansando em seu castelo</h2>
+            </div> 
+        </article>
+
+        <!-- Foto 6 -->
+        <article data-audio="audio/papo.mp3">
+            <img src="https://files.catbox.moe/9y6vga.png" alt="paocomovo" class="foto">
+            <div class="info">
+                <h2>Sua primeira e ultima refeiçao do dia é Pao com Ovo</h2>
+            </div>
+        </article>
+    </section>
+
+    <!-- ÁREA ADMIN -->
+    <div id="adminPanel">
+        <h2>📊 PAINEL DO CARLOS</h2>
+        <button class="btn-fechar" onclick="fecharAdmin()">FECHAR X</button>
         
-        <div style="margin:20px 0;">
+        <div class="admin-section">
             <h3>🕐 Acesso Atual:</h3>
-            <p id="acessoAtual" style="font-size:18px; color:white;"></p>
+            <p id="acessoAtual"></p>
         </div>
         
-        <div style="margin:20px 0;">
+        <div class="admin-section">
             <h3>📱 Histórico de Visitas (<span id="totalVisitas">0</span> total):</h3>
-            <div id="historicoVisitas" style="background:rgba(0,0,0,0.5); padding:15px; border-radius:5px; max-height:400px; overflow-y:auto;"></div>
+            <div id="historicoVisitas"></div>
         </div>
         
-        <div style="margin:20px 0;">
+        <div class="admin-section">
             <h3>🖼️ Cliques nas Fotos:</h3>
-            <div id="statsFotos" style="background:rgba(0,0,0,0.5); padding:15px; border-radius:5px;"></div>
+            <div id="statsFotos"></div>
         </div>
         
-        <button onclick="exportarDados()" style="background:#00f0ff; color:black; border:none; padding:10px 20px; cursor:pointer; margin-top:10px; margin-right:10px; font-weight:bold;">💾 Exportar Dados</button>
-        <button onclick="limparDados()" style="background:#ff0055; color:white; border:none; padding:10px 20px; cursor:pointer; margin-top:10px;">🗑️ Limpar Todos os Dados</button>
+        <button class="btn-exportar" onclick="exportarDados()">💾 Exportar Dados</button>
+        <button class="btn-limpar" onclick="limparDados()">🗑️ Limpar Dados</button>
     </div>
 
-    <!-- Botão secreto para mobile (canto inferior direito, invisível) - toque 5x rapidamente -->
-    <div onclick="ativarMobileAdmin()" style="position:fixed; bottom:0; right:0; width:60px; height:60px; z-index:9998; opacity:0;" title="Área Admin"></div>
+    <!-- Botão secreto mobile -->
+    <div id="mobileSecret" onclick="ativarMobileAdmin()"></div>
 
     <script src="animacao.js"></script>
 </body>
