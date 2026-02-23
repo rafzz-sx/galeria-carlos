@@ -1,16 +1,60 @@
+/* ==========================================
+   GALERIA DO CARLOS - CSS COMPLETO
+   ========================================== */
+
+/* === VARIÁVEIS === */
+:root {
+    --neon-color: #00f0ff;
+    --neon-glow: 0 0 20px #00f0ff;
+    --bg-dark: #0a0a0f;
+    --overlay-gradient: linear-gradient(
+        120deg,
+        rgba(90, 50, 255, 0.6),
+        rgba(0, 200, 255, 0.6)
+    );
+}
+
+/* === RESET BÁSICO === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #222;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overflow-x: hidden;
+}
+
+/* ==========================================
+   GALERIA
+   ========================================== */
 .galeria {
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
+    padding: 40px;
 }
 
 /* CARD */
 .galeria article {
     flex: 1 1 calc(50% - 40px);
-    position: relative;        /* FUNDAMENTAL */
+    position: relative;
     overflow: hidden;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.galeria article:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.galeria article.ativo {
+    box-shadow: 0 0 30px var(--neon-color);
 }
 
 /* IMAGEM */
@@ -18,24 +62,21 @@
     width: 100%;
     height: 800px;
     display: block;
-    cursor: pointer;
+    object-fit: cover;
 }
 
 /* TEXTO (FORA DO FLUXO) */
 .galeria .info {
-    position: absolute;        /* REMOVE DO FLUXO */
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
-
     background: rgba(0,0,0,0.75);
     color: white;
     padding: 15px;
-
     opacity: 0;
     transform: translateY(100%);
     transition: opacity 0.3s ease, transform 0.3s ease;
-
     pointer-events: none;
 }
 
@@ -46,12 +87,9 @@
     pointer-events: auto;
 }
 
-/* MOBILE */
-@media (max-width: 600px) {
-    .galeria article {
-        flex: 1 1 100%;
-    }
-}
+/* ==========================================
+   INTRO
+   ========================================== */
 .intro {
     position: fixed;
     inset: 0;
@@ -67,7 +105,7 @@
     overflow: hidden;
     display: flex;
     align-items: center;
-    padding-top: 10px; /* DESCE A ESTEIRA */
+    padding-top: 10px;
 }
 
 .faixa {
@@ -75,7 +113,7 @@
     gap: 60px;
     width: max-content;
     opacity: 0.9;
-    animation: esteira 60s linear infinite;
+    animation: esteira 15s linear infinite;
 }
 
 .faixa img {
@@ -88,15 +126,11 @@
     to   { transform: translateX(-40%); }
 }
 
-/* OVERLAY DE COR (REFINO) */
+/* OVERLAY DE COR */
 .overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-        120deg,
-        rgba(90, 50, 255, 0.6),
-        rgba(0, 200, 255, 0.6)
-    );
+    background: var(--overlay-gradient);
     backdrop-filter: blur(6px);
 }
 
@@ -118,15 +152,15 @@
 .linha-neon {
     width: 250px;
     height: 4px;
-    background: #00f0ff;
-    box-shadow: 0 0 20px #00f0ff;
+    background: var(--neon-color);
+    box-shadow: var(--neon-glow);
 }
 
 /* TÍTULO */
 .conteudo-intro h1 {
-    font-size: 42px;
+    font-size: 52px;
     font-weight: 300;
-    letter-spacing: 4px;
+    letter-spacing: 3px;
 }
 
 /* BOTÃO */
@@ -147,10 +181,7 @@
     color: black;
 }
 
-/* =========================
-   SAÍDA DA INTRO
-   ========================= */
-
+/* SAÍDA DA INTRO */
 .intro.sair {
     animation: sair 2s ease forwards;
 }
@@ -162,11 +193,11 @@
         filter: blur(10px);
     }
 }
-/* =========================
-   CAMADA DE INSTRUÇÕES
-   ========================= */
 
-   .instrucoes {
+/* ==========================================
+   INSTRUÇÕES
+   ========================================== */
+.instrucoes {
     position: fixed;
     inset: 0;
     background: #000;
@@ -175,7 +206,6 @@
     align-items: center;
     justify-content: center;
     z-index: 9000;
-
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.6s ease;
@@ -195,16 +225,17 @@
 }
 
 .conteudo-instrucoes h2 {
-    font-size: 32px;
+    font-size: 36px;
     font-weight: 300;
     margin-bottom: 20px;
     letter-spacing: 2px;
 }
 
 .conteudo-instrucoes p {
-    font-size: 16px;
-    line-height: 1.7;
+    font-size: 22px;
+    line-height: 1.8;
     opacity: 0.85;
+    margin-bottom: 15px;
 }
 
 /* BOTÃO */
@@ -213,11 +244,9 @@
     padding: 14px 40px;
     font-size: 14px;
     letter-spacing: 3px;
-
     background: transparent;
     color: white;
     border: 1px solid white;
-
     cursor: pointer;
     transition: 0.3s ease;
 }
@@ -226,42 +255,75 @@
     background: white;
     color: black;
 }
-.card {
-    position: relative;
-    cursor: pointer;
+
+/* ==========================================
+   PAINEL ADMIN
+   ========================================== */
+#adminPanel {
+    backdrop-filter: blur(10px);
 }
 
-.card .texto {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    color: white;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    opacity: 0;
-    transition: opacity 0.4s ease;
+#adminPanel::-webkit-scrollbar {
+    width: 10px;
 }
 
-/* ATIVO */
-.card.ativo .texto {
-    opacity: 1;
-}
-.conteudo-instrucoes h2 {
-     font-size: 36px; /* antes: 32px */ 
-}
-.conteudo-instrucoes p {
-     font-size: 22px; /* antes: 16px */ 
-     line-height: 1.8; /* melhora a leitura */ 
-}
-.conteudo-intro h1 { 
-    font-size: 52px; /* antes: 42px */
-     letter-spacing: 3px; /* opcional: reduzir um pouco o espaçamento */
-}
-body {
-     background-color: #222; /* fundo escuro */ 
+#adminPanel::-webkit-scrollbar-track {
+    background: #111;
 }
 
+#adminPanel::-webkit-scrollbar-thumb {
+    background: var(--neon-color);
+    border-radius: 5px;
+}
 
+#adminPanel h3 {
+    color: #fff;
+    margin-top: 20px;
+    font-size: 20px;
+    border-left: 3px solid var(--neon-color);
+    padding-left: 10px;
+}
+
+/* ==========================================
+   MOBILE
+   ========================================== */
+@media (max-width: 600px) {
+    .galeria {
+        padding: 20px;
+        gap: 20px;
+    }
+    
+    .galeria article {
+        flex: 1 1 100%;
+    }
+    
+    .galeria img {
+        height: 400px;
+    }
+    
+    .conteudo-intro h1 {
+        font-size: 32px;
+        letter-spacing: 2px;
+    }
+    
+    .faixa img {
+        width: 180px;
+    }
+    
+    .conteudo-instrucoes h2 {
+        font-size: 28px;
+    }
+    
+    .conteudo-instrucoes p {
+        font-size: 18px;
+    }
+    
+    #adminPanel {
+        padding: 15px;
+        font-size: 14px;
+    }
+    
+    #adminPanel h2 {
+        font-size: 24px;
+    }
+}
