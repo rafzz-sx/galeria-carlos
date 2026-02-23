@@ -1,9 +1,15 @@
-const imagens = document.querySelectorAll(".foto")
+console.log('🎵 Galeria do Carlos carregada!');
+
+// ==========================================
+// PARTE 1: GALERIA ORIGINAL (FUNCIONANDO)
+// ==========================================
+
+const imagens = document.querySelectorAll(".foto");
 imagens.forEach(img => {
-    img.addEventListener("click", () =>{
+    img.addEventListener("click", () => {
         const info = img.nextElementSibling;
         info.classList.toggle("ativo");
- });
+    });
 });
 
 const intro = document.getElementById("intro");
@@ -11,58 +17,64 @@ const btnEntrar = document.getElementById("entrar");
 const instrucoes = document.getElementById("instrucoes");
 const btnGaleria = document.getElementById("btnGaleria");
 
-/* 1️⃣ Sai da intro → mostra instruções */
+// Transição intro -> instruções
 btnEntrar.addEventListener("click", () => {
     intro.classList.add("sair");
-
     setTimeout(() => {
         intro.remove();
         instrucoes.classList.add("ativa");
     }, 150);
 });
 
-/* 2️⃣ Sai das instruções → galeria */
+// Transição instruções -> galeria
 btnGaleria.addEventListener("click", () => {
     instrucoes.classList.remove("ativa");
-
     setTimeout(() => {
         instrucoes.remove();
     }, 600);
 });
 
+// Sistema de áudio
 let audioAtual = new Audio();
 audioAtual.preload = "auto";
 audioAtual.volume = 1;
-
 let elementoAtivo = null;
 
 const elementosComAudio = document.querySelectorAll('[data-audio]');
 
 elementosComAudio.forEach(el => {
-    el.addEventListener("click", () => {
+    el.addEventListener("click", (e) => {
+        // Evita duplo disparo se clicar na imagem e no article
+        e.stopPropagation();
+        
         const audioSrc = el.dataset.audio;
+        console.log('🎵 Tentando tocar:', audioSrc);
 
-        // Se clicar no mesmo elemento
+        // Se clicar no mesmo elemento, para
         if (el === elementoAtivo) {
             pararTudo();
             return;
         }
 
-        // Se clicar em outro
+        // Para qualquer outro ativo
         pararTudo();
 
+        // Ativa novo
         el.classList.add("ativo");
         elementoAtivo = el;
 
-        // APENAS TROCA O SRC E DÁ PLAY
+        // Toca áudio
         audioAtual.src = audioSrc;
         audioAtual.currentTime = 0;
-
-        audioAtual.play().catch(() => {
-            console.log("Áudio bloqueado pelo navegador mobile");
-        });
         
-        // NOVO: Rastrear clique na foto
+        audioAtual.play().then(() => {
+            console.log('✅ Tocando:', audioSrc);
+        }).catch((err) => {
+            console.error('❌ Erro ao tocar:', audioSrc, err);
+            alert('Erro ao carregar áudio: ' + audioSrc + '\nVerifique se o arquivo existe na pasta audio/');
+        });
+
+        // Registra clique
         registrarCliqueFoto(el);
     });
 });
@@ -72,7 +84,6 @@ function pararTudo() {
         audioAtual.pause();
         audioAtual.currentTime = 0;
     }
-
     if (elementoAtivo) {
         elementoAtivo.classList.remove("ativo");
         elementoAtivo = null;
@@ -80,10 +91,9 @@ function pararTudo() {
 }
 
 // ==========================================
-// NOVO: SISTEMA DE RASTREAMENTO
+// PARTE 2: RASTREAMENTO (NOVO)
 // ==========================================
 
-// Registrar acesso com data e hora
 function registrarAcesso() {
     const agora = new Date();
     const dataHora = {
@@ -91,69 +101,58 @@ function registrarAcesso() {
         hora: agora.toLocaleTimeString('pt-BR'),
         timestamp: agora.getTime(),
         diaSemana: agora.toLocaleDateString('pt-BR', { weekday: 'long' }),
-        userAgent: navigator.userAgent.substring(0, 50) + '...',
-        plataforma: navigator.platform
+        plataforma: navigator.platform,
+        userAgent: navigator.userAgent.substring(0, 30)
     };
     
-    // Salvar no localStorage
     let historico = JSON.parse(localStorage.getItem('carlos_acessos') || '[]');
     historico.push(dataHora);
     localStorage.setItem('carlos_acessos', JSON.stringify(historico));
     
-    // Mostrar no console
-    console.log('🎉 NOVO ACESSO NA GALERIA DO CARLOS!');
-    console.log('📅 Data:', dataHora.data);
-    console.log('🕐 Hora:', dataHora.hora);
-    console.log('💻 Dispositivo:', dataHora.plataforma);
-    
-    return dataHora;
+    console.log('📊 Acesso registrado:', dataHora.data, dataHora.hora);
 }
 
-// Registrar clique em foto
 function registrarCliqueFoto(elemento) {
     const titulo = elemento.querySelector('h2')?.textContent || 'Foto sem título';
-    const agora = new Date();
-    
     let cliques = JSON.parse(localStorage.getItem('carlos_cliques') || '{}');
+    
     if (!cliques[titulo]) {
         cliques[titulo] = { count: 0, ultimoClique: null };
     }
     cliques[titulo].count++;
-    cliques[titulo].ultimoClique = agora.toLocaleString('pt-BR');
+    cliques[titulo].ultimoClique = new Date().toLocaleString('pt-BR');
     
     localStorage.setItem('carlos_cliques', JSON.stringify(cliques));
+    console.log('📸 Clique registrado:', titulo, 'Total:', cliques[titulo].count);
 }
 
-// Atualizar painel admin com dados
+// ==========================================
+// PARTE 3: PAINEL ADMIN (CORRIGIDO)
+// ==========================================
+
 function atualizarPainelAdmin() {
-    const acessoAtual = document.getElementById('acessoAtual');
-    const historicoDiv = document.getElementById('historicoVisitas');
-    const totalVisitas = document.getElementById('totalVisitas');
-    const statsFotos = document.getElementById('statsFotos');
+    const agora = new Date();
     
     // Acesso atual
-    const agora = new Date();
-    acessoAtual.innerHTML = `
+    document.getElementById('acessoAtual').innerHTML = `
         <strong>Data:</strong> ${agora.toLocaleDateString('pt-BR')}<br>
         <strong>Hora:</strong> ${agora.toLocaleTimeString('pt-BR')}<br>
         <strong>Dia:</strong> ${agora.toLocaleDateString('pt-BR', { weekday: 'long' })}<br>
-        <strong>Dispositivo:</strong> ${navigator.platform}<br>
-        <strong>Navegador:</strong> ${navigator.userAgent.split(' ').pop()}
+        <strong>Plataforma:</strong> ${navigator.platform}
     `;
     
     // Histórico
     const historico = JSON.parse(localStorage.getItem('carlos_acessos') || '[]');
-    totalVisitas.textContent = historico.length;
+    document.getElementById('totalVisitas').textContent = historico.length;
     
+    const historicoDiv = document.getElementById('historicoVisitas');
     if (historico.length === 0) {
-        historicoDiv.innerHTML = '<p style="color:#888;">Nenhum acesso registrado ainda...</p>';
+        historicoDiv.innerHTML = '<p style="color:#888;">Nenhum acesso ainda...</p>';
     } else {
         historicoDiv.innerHTML = historico.slice().reverse().map((visita, index) => `
-            <div style="border-bottom:1px solid #333; padding:10px 0; ${index === 0 ? 'background:rgba(0,240,255,0.1);' : ''}">
-                <strong style="color:${index === 0 ? '#00f0ff' : 'white'}">
-                    ${index === 0 ? '🆕 ' : ''}${visita.data} às ${visita.hora}
-                </strong><br>
-                <small style="color:#888;">${visita.diaSemana} | ${visita.plataforma}</small>
+            <div class="visita-item ${index === 0 ? 'recente' : ''}">
+                <div class="visita-data">${index === 0 ? '🆕 ' : ''}${visita.data} às ${visita.hora}</div>
+                <div class="visita-info">${visita.diaSemana} | ${visita.plataforma}</div>
             </div>
         `).join('');
     }
@@ -162,75 +161,47 @@ function atualizarPainelAdmin() {
     const cliques = JSON.parse(localStorage.getItem('carlos_cliques') || '{}');
     const fotosOrdenadas = Object.entries(cliques).sort((a, b) => b[1].count - a[1].count);
     
+    const statsDiv = document.getElementById('statsFotos');
     if (fotosOrdenadas.length === 0) {
-        statsFotos.innerHTML = '<p style="color:#888;">Nenhum clique registrado...</p>';
+        statsDiv.innerHTML = '<p style="color:#888;">Nenhum clique registrado...</p>';
     } else {
-        statsFotos.innerHTML = fotosOrdenadas.map(([titulo, dados], index) => `
-            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid #333;">
-                <span style="flex:1; margin-right:10px;">${index + 1}. ${titulo}</span>
-                <span style="color:#00f0ff; font-weight:bold; white-space:nowrap;">${dados.count} cliques</span>
+        statsDiv.innerHTML = fotosOrdenadas.map(([titulo, dados], index) => `
+            <div class="foto-stat">
+                <span>${index + 1}. ${titulo}</span>
+                <span class="foto-stat-count">${dados.count} cliques</span>
             </div>
         `).join('');
     }
 }
 
-// Abrir painel admin (PC)
-let teclaCCount = 0;
-let ultimoTempoC = 0;
-
-document.addEventListener('keydown', (e) => {
-    const agora = Date.now();
-    
-    // Detectar 'C' pressionado 3x rápido (dentro de 1.5 segundos)
-    if (e.key === 'c' || e.key === 'C') {
-        if (agora - ultimoTempoC < 1500) {
-            teclaCCount++;
-        } else {
-            teclaCCount = 1;
-        }
-        ultimoTempoC = agora;
-        
-        if (teclaCCount >= 3) {
-            abrirAdmin();
-            teclaCCount = 0;
-        }
-    }
-    
-    // Alternativa: Ctrl+Shift+C
-    if (e.ctrlKey && e.shiftKey && e.key === 'C') {
-        abrirAdmin();
-    }
-    
-    // Fechar com ESC
-    if (e.key === 'Escape') {
-        fecharAdmin();
-    }
-});
-
-// Abrir painel admin
 function abrirAdmin() {
+    console.log('🔓 Abrindo painel admin...');
     const panel = document.getElementById('adminPanel');
-    panel.style.display = 'block';
-    atualizarPainelAdmin();
-    console.log('🔓 PAINEL ADMIN ABERTO');
+    if (panel) {
+        panel.style.display = 'block';
+        atualizarPainelAdmin();
+        console.log('✅ Painel aberto!');
+    } else {
+        console.error('❌ Painel não encontrado no HTML');
+    }
 }
 
-// Fechar painel admin
 function fecharAdmin() {
-    document.getElementById('adminPanel').style.display = 'none';
+    const panel = document.getElementById('adminPanel');
+    if (panel) {
+        panel.style.display = 'none';
+    }
 }
 
-// Limpar todos os dados
 function limparDados() {
-    if (confirm('Tem certeza que quer apagar TODO o histórico?')) {
+    if (confirm('Apagar TODO o histórico?')) {
         localStorage.removeItem('carlos_acessos');
         localStorage.removeItem('carlos_cliques');
         atualizarPainelAdmin();
-        alert('Dados apagados com sucesso!');
+        alert('Dados apagados!');
     }
 }
 
-// Exportar dados (backup)
 function exportarDados() {
     const dados = {
         acessos: JSON.parse(localStorage.getItem('carlos_acessos') || '[]'),
@@ -248,7 +219,51 @@ function exportarDados() {
     console.log('💾 Dados exportados!');
 }
 
-// Mobile: toque 5x no canto inferior direito
+// ==========================================
+// ATALHOS PARA ABRIR O PAINEL
+// ==========================================
+
+// Método 1: Tecla 'C' 3x rápido
+let teclaCCount = 0;
+let ultimoTempoC = 0;
+
+document.addEventListener('keydown', (e) => {
+    // Debug no console
+    console.log('Tecla pressionada:', e.key);
+    
+    // Fechar com ESC
+    if (e.key === 'Escape') {
+        fecharAdmin();
+        return;
+    }
+    
+    // Detectar 'C' ou 'c'
+    if (e.key === 'c' || e.key === 'C') {
+        const agora = Date.now();
+        
+        if (agora - ultimoTempoC < 2000) {
+            teclaCCount++;
+            console.log('Contagem C:', teclaCCount);
+        } else {
+            teclaCCount = 1;
+            console.log('Contagem reiniciada');
+        }
+        ultimoTempoC = agora;
+        
+        if (teclaCCount >= 3) {
+            abrirAdmin();
+            teclaCCount = 0;
+        }
+    }
+    
+    // Método 2: Ctrl+Shift+C (mais fácil)
+    if (e.ctrlKey && e.shiftKey && (e.key === 'C' || e.key === 'c')) {
+        console.log('Atalho Ctrl+Shift+C detectado!');
+        abrirAdmin();
+    }
+});
+
+// Método 3: Mobile - toque 5x no canto inferior direito
 let toquesMobile = 0;
 let ultimoToqueTempo = 0;
 
@@ -262,17 +277,23 @@ function ativarMobileAdmin() {
     }
     ultimoToqueTempo = agora;
     
+    console.log('Toques mobile:', toquesMobile);
+    
     if (toquesMobile >= 5) {
         abrirAdmin();
         toquesMobile = 0;
-        // Feedback tátil se disponível
-        if (navigator.vibrate) {
-            navigator.vibrate(50);
-        }
+        if (navigator.vibrate) navigator.vibrate(50);
     }
 }
 
-// Iniciar quando página carregar
+// ==========================================
+// INICIALIZAÇÃO
+// ==========================================
+
 window.addEventListener('load', () => {
+    console.log('🚀 Página carregada, registrando acesso...');
     registrarAcesso();
+    
+    // Teste: mostra no console como abrir o painel
+    console.log('💡 DICA: Aperte C 3x rápido ou Ctrl+Shift+C para abrir o painel admin');
 });
