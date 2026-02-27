@@ -615,5 +615,6 @@ function ativarMobileAdmin() {
 window.addEventListener('load', () => {
     console.log('🚀 Iniciando...');
     registrarAcesso();
-    console.log('💡 DICA: Aperte C 3x ou Ctrl+Shift+C para o painel');
+    console.log('💡 Painel somente para o Desenvolvedor: Rafael V');
 });
+
