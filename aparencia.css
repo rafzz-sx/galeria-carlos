@@ -98,7 +98,7 @@ body {
 }
 
 .faixa img {
-    width: 260px;
+    width: 280px;
     filter: blur(1px) brightness(0.95);
 }
 
@@ -631,3 +631,4 @@ body {
         align-items: flex-start;
     }
 }
+
